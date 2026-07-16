@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'style/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<div class="row justify-content-center pt-4">
+
+    <h3 class="fw-bold">
+        Audit Logs
+    </h3>
+
+
+    <!-- Filter Form START -->
+
+    <form method="GET" class="row g-3 mb-4">
+
+        <div class="col-md-4">
+
+            <select name="action" class="form-select">
+
+                <option value="" {% if not request.GET.action %}selected{% endif %}>
+                    All Actions
+                </option>
+<option value="CREATE" {% if request.GET.action == "CREATE" %}selected{% endif %}>
+                        CREATE
+                </option>
+                <option value="UPDATE" {% if request.GET.action == "UPDATE" %}selected{% endif %}>
+                    UPDATE
+                </option>
+
+                <option value="DELETE" {% if request.GET.action == "DELETE" %}selected{% endif %}>
+                    DELETE
+                </option>
+                <option value="IMPORT" {% if request.GET.action == "IMPORT" %}selected{% endif %}>
+                    IMPORT
+                </option>
+            </select>
+
+        </div>
+
+
+        <div class="col-md-2">
+
+            <button class="btn btn-primary">
+                Filter
+            </button>
+
+        </div>
+
+    </form>
+
+    <!-- Filter Form END -->
+
+    <!-- Audit Log Table -->
+
+  <div class="table-responsive shadow-sm rounded-0 overflow-hidden">
+        <table class="table table-hover table-bordered align-middle mb-0">
+
+            <thead class="table-dark">
+
+                <tr>
+                    <th>User</th>
+                    <th>Module</th>
+                    <th>Action</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for log in page_obj %}
+
+                <tr>
+
+                    <td>
+                        {% if log.user %}
+                            {{ log.user.username }}
+                        {% else %}
+                            System
+                        {% endif %}
+                    </td>
+
+                    <td>{{ log.module }}</td>
+
+                    <td>
+
+                        {% if log.action == "CREATE" %}
+                            <span class="badge bg-success">{{ log.action }}</span>
+                        {% elif log.action == "UPDATE" %}
+                            <span class="badge bg-primary">{{ log.action }}</span>
+                        {% elif log.action == "DELETE" %}
+                            <span class="badge bg-danger">{{ log.action }}</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">{{ log.action }}</span>
+                        {% endif %}
+
+                    </td>
+
+                    <td>{{ log.description }}</td>
+
+                    <td>{{ log.created_at|date:"d M Y H:i" }}</td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="5" class="text-center py-5 text-muted">
+                        No audit logs found.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+    <!-- Pagination START -->
+
+    <nav class="mt-4">
+
+        <ul class="pagination justify-content-center">
+
+
+            {% if page_obj.has_previous %}
+
+            <li class="page-item">
+
+                <a class="page-link"
+                    href="?page={{ page_obj.previous_page_number }}{% if request.GET.action %}&action={{ request.GET.action }}{% endif %}">
+
+                    Previous
+
+                </a>
+
+            </li>
+
+            {% endif %}
+
+
+
+            {% for num in page_obj.paginator.page_range %}
+
+            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+
+                <a class="page-link"
+                    href="?page={{ num }}{% if request.GET.action %}&action={{ request.GET.action }}{% endif %}">
+
+                    {{ num }}
+
+                </a>
+
+            </li>
+
+            {% endfor %}
+
+
+
+            {% if page_obj.has_next %}
+
+            <li class="page-item">
+
+                <a class="page-link"
+                    href="?page={{ page_obj.next_page_number }}{% if request.GET.action %}&action={{ request.GET.action }}{% endif %}">
+
+                    Next
+
+                </a>
+
+            </li>
+
+            {% endif %}
+
+
+        </ul>
+
+    </nav>
+
+    <!-- Pagination END -->
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,110 @@
+/* DASHBOARD HEADER */
+
+.dashboard-header{
+    margin-bottom:40px;
+}
+
+.dashboard-header h2{
+    font-size:34px;
+    font-weight:700;
+}
+
+.dashboard-header p{
+    color:#6c757d;
+}
+
+/* STATISTICS CARD */
+
+.dashboard-card{
+    background:#fff;
+    border-radius:20px;
+    padding:28px;
+    /* text-align:center; */
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+    height:100%;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-6px);
+}
+
+.dashboard-card h6{
+    color:#6c757d;
+    margin:18px 0 8px;
+}
+
+.dashboard-card h2{
+    font-size:36px;
+    font-weight:700;
+}
+
+/* ICON */
+
+.dashboard-icon{
+    width:68px;
+    height:68px;
+    border-radius:18px;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    /* margin:auto; */
+    font-size:28px;
+}
+
+/* DASHBOARD PANELS */
+
+.dashboard-panel{
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.dashboard-panel .card-header{
+    background:#fff;
+    border-bottom:1px solid #f1f1f1;
+    padding:20px;
+}
+
+.dashboard-panel .card-body{
+    padding:25px;
+}
+
+/* QUICK ACTION BUTTONS */
+
+.action-btn{
+    border-radius:12px;
+    padding:12px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+/* AUDIT LOG */
+
+.audit-item{
+    padding:16px 0;
+    border-bottom:1px solid #ececec;
+}
+
+.audit-item:last-child{
+    border-bottom:none;
+}
+
+/* EMPTY STATE */
+
+.empty-state{
+    padding:60px 20px;
+    text-align:center;
+    color:#6c757d;
+}
+
+.empty-state i{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+#analyticsChart{
+    width:100% !important;
+    height:280px !important;
+}

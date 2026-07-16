@@ -1,0 +1,447 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'style/reports.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <!-- Header -->
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-5">
+
+        <div>
+
+            <h2 class="page-title fw-bold mb-1">
+                Reports Dashboard
+            </h2>
+
+            <p class="text-muted mb-0">
+                Student Management System Analytics
+            </p>
+
+        </div>
+
+       <div class="d-flex gap-2 flex-wrap justify-content-end">
+
+    <a href="{% url 'audit_log_list' %}"
+   class="btn btn-primary rounded-pill px-4">
+
+    <i class="bi bi-bar-chart-fill me-2"></i>
+
+    View Audit Logs
+
+</a>
+
+    <a href="{% url 'export_students_pdf' %}"
+       class="btn btn-danger rounded-pill px-4">
+
+        <i class="bi bi-file-earmark-pdf-fill me-2"></i>
+
+        Export PDF
+
+    </a>
+
+    <a href="{% url 'export_students_excel' %}"
+       class="btn btn-success rounded-pill px-4">
+
+        <i class="bi bi-file-earmark-excel-fill me-2"></i>
+
+        Export Excel
+
+    </a>
+
+</div>
+
+    </div>
+
+    <!-- Statistics -->
+
+<div class="row g-4 mb-5">
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="stats-card students">
+
+            <div>
+
+                <span class="stats-title">
+                    Total Students
+                </span>
+
+                <h2 class="stats-number">
+                    {{ student_count }}
+                </h2>
+
+            </div>
+
+            <div class="stats-icon">
+
+                <i class="bi bi-mortarboard-fill"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="stats-card courses">
+
+            <div>
+
+                <span class="stats-title">
+                    Total Courses
+                </span>
+
+                <h2 class="stats-number">
+                    {{ course_count }}
+                </h2>
+
+            </div>
+
+            <div class="stats-icon">
+
+                <i class="bi bi-book-fill"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="stats-card faculty">
+
+            <div>
+
+                <span class="stats-title">
+                    Total Faculty
+                </span>
+
+                <h2 class="stats-number">
+                    {{ faculty_count }}
+                </h2>
+
+            </div>
+
+            <div class="stats-icon">
+
+                <i class="bi bi-person-workspace"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="stats-card attendance">
+
+            <div>
+
+                <span class="stats-title">
+                    Attendance
+                </span>
+
+                <h2 class="stats-number">
+                    {{ attendance_count }}
+                </h2>
+
+            </div>
+
+            <div class="stats-icon">
+
+                <i class="bi bi-calendar-check-fill"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row g-4 mb-5">
+
+    <!-- Attendance -->
+<div class="col-lg-8">
+
+    <div class="report-box">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <h5 class="fw-bold mb-0">
+                Attendance Analytics
+            </h5>
+
+            <span class="badge bg-success rounded-pill">
+                Live
+            </span>
+
+        </div>
+
+        {% if attendance_count %}
+
+        <div class="mb-4">
+
+            <div class="d-flex justify-content-between mb-2">
+
+                <span>Present</span>
+
+                <strong>{{ present_count }}</strong>
+
+            </div>
+
+            <div class="progress report-progress">
+
+                <div class="progress-bar bg-success"
+                     style="width:{% widthratio present_count attendance_count 100 %}%">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div>
+
+            <div class="d-flex justify-content-between mb-2">
+
+                <span>Absent</span>
+
+                <strong>{{ absent_count }}</strong>
+
+            </div>
+
+            <div class="progress report-progress">
+
+                <div class="progress-bar bg-danger"
+                     style="width:{% widthratio absent_count attendance_count 100 %}%">
+                </div>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="text-center py-5">
+
+            <i class="bi bi-calendar-x fs-1 text-secondary"></i>
+
+            <h6 class="mt-3">
+                No Attendance Records
+            </h6>
+
+            <p class="text-muted mb-0">
+                Attendance data is not available.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+    <!-- Audit -->
+
+    <div class="col-lg-4">
+
+        <div class="report-box text-center">
+
+            <div class="audit-circle">
+
+                {{ audit_count }}
+
+            </div>
+
+            <h5 class="fw-bold mt-4">
+
+                Total Audit Logs
+
+            </h5>
+
+            <p class="text-muted mb-0">
+
+                Activities recorded in the system.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-12">
+
+        <div class="report-box">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <div>
+
+                    <h5 class="fw-bold mb-1">
+                        Recent Activities
+                    </h5>
+
+                    <small class="text-muted">
+                        Latest system audit logs
+                    </small>
+
+                </div>
+
+                <span class="badge bg-primary rounded-pill">
+                    {{ audit_count }} Logs
+                </span>
+
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table premium-table align-middle mb-0">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>User</th>
+                            <th>Module</th>
+                            <th>Action</th>
+                            <th>Description</th>
+                            <th>Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for log in recent_logs %}
+
+                        <tr>
+
+                            <td>
+
+                                <div class="d-flex align-items-center">
+
+                                    <div class="user-avatar">
+
+                                        {{ log.user.username|first|upper }}
+
+                                    </div>
+
+                                    <span class="ms-2">
+
+                                        {{ log.user.username }}
+
+                                    </span>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-light text-dark">
+
+                                    {{ log.module }}
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                {% if log.action == "CREATE" %}
+
+                                <span class="badge bg-success">
+
+                                    {{ log.action }}
+
+                                </span>
+
+                                {% elif log.action == "UPDATE" %}
+
+                                <span class="badge bg-warning text-dark">
+
+                                    {{ log.action }}
+
+                                </span>
+
+                                {% elif log.action == "DELETE" %}
+
+                                <span class="badge bg-danger">
+
+                                    {{ log.action }}
+
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge bg-primary">
+
+                                    {{ log.action }}
+
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {{ log.description }}
+
+                            </td>
+
+                            <td>
+
+                                {{ log.created_at|date:"d M Y" }}
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="5" class="text-center py-4">
+
+                                No recent activities found.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+{% endblock %}

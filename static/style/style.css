@@ -1,0 +1,285 @@
+/* GLOBAL */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f4f7fb;
+    color:#212529;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+.navbar{
+    height:65px;
+    background:linear-gradient(135deg,#1e3c72,#2a5298);
+    box-shadow:0 4px 15px rgba(0,0,0,.12);
+    z-index:1050;
+}
+
+.navbar-brand{
+    font-size:28px;
+    font-weight:700;
+    color:#fff !important;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    top:unset !important;
+    position:fixed;
+    top:65px;
+    left:0;
+    width:250px;
+    height:calc(100vh - 60px);
+    background:#111827;
+}
+
+.sidebar .offcanvas-body{
+    padding:12px;
+}
+
+.sidebar a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 18px;
+    margin-bottom:8px;
+    border-radius:12px;
+    text-decoration:none;
+    color:#fff;
+    transition:.3s;
+}
+
+.sidebar a:hover{
+    background:#2563eb;
+}
+
+.sidebar a.active{
+    background:#2563eb;
+}
+
+/* CONTENT */
+.content.no-sidebar{
+    margin-left:0;
+}
+
+.content{
+    /* text-align:center; */
+    margin-left:250px;
+    margin-top:65px;
+    /* padding:30px 0; */
+    min-height:calc(100vh - 125px);
+}
+
+.login-content{
+    margin-top:65px;
+    min-height:calc(100vh - 125px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* COMMON CARD */
+
+.page-card{
+    background:#fff;
+    border:none;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+/* FORM */
+
+.form-control,
+.form-select{
+    height:46px;
+    border-radius:10px;
+}
+
+textarea.form-control{
+    height:120px;
+}
+
+.form-control:focus,
+.form-select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 .15rem rgba(37,99,235,.15);
+}
+
+/* BUTTON */
+
+.btn{
+    font-weight:600;
+    border-radius:10px;
+}
+
+/* TABLE */
+
+.table-responsive{
+    border-radius:15px;
+}
+
+.table thead{
+    background:#2563eb;
+    color:#fff;
+}
+
+/* ALERT */
+
+.alert{
+    border-radius:12px;
+}
+
+.admin-layout .floating-alert{
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    width: 350px;
+    z-index: 9999;
+     transform:unset !important;
+}
+
+.floating-alert{
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    width: 350px;
+    z-index: 9999;
+   
+    transform: translateX(-50%);
+}
+
+/* .login-page .floating-alert{
+    transform: none;
+    left: 20px;
+} */
+
+/* LOGIN */
+
+.login-card{
+    width:420px;
+    background:#fff;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+    float:none;
+    display:inline-block
+}
+
+/* FOOTER */
+
+.footer{
+    height:60px;
+    background:#111827;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.table-responsive{
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+}
+.action-column{
+    width:130px;
+    min-width:100px;
+    white-space:nowrap;
+}
+
+.action-column .btn{
+    margin-right:6px;
+}
+.reset-top-3{
+    top:4px;
+}
+/* MOBILE */
+
+@media(max-width:991px){
+
+.sidebar{
+        top: 0 !important;
+    /* position:relative; */
+    width:100%;
+    height:auto;
+    width:203px !important;
+}
+
+.content{
+    margin-left:0;
+}
+
+.login-card{
+    width:95%;
+}
+
+}
+
+/* Desktop Sidebar Fix */
+
+@media (min-width: 992px){
+
+    .sidebar.offcanvas{
+        transform: translateX(0);
+        visibility: visible;
+        width:250px;
+        border-right:none;
+    }
+
+    .sidebar .offcanvas-body{
+        overflow-y:auto;
+    }
+
+}
+
+
+.login-header i{
+        background:linear-gradient(135deg,#000000,#2563eb,#60a5fa);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+}
+
+
+@media(max-width:576px){
+
+    .page-title{
+        font-size:24px;
+    }
+
+    .btn{
+        font-size:13px;
+    }
+
+    .table{
+        font-size:14px;
+    }
+
+    .floating-alert{
+        width:90%;
+    }
+
+}
+
+
+input{
+    border-radius:12px !important;
+    padding:12px !important;
+}
+
+.card{
+    background:#fff;
+}
+
+.form-label{
+    color:#333;
+}

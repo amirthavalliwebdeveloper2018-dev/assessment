@@ -1,0 +1,324 @@
+/* ===========================
+   REPORTS PAGE
+=========================== */
+
+.stats-card{
+
+    position: relative;
+
+    overflow: hidden;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:28px;
+
+    border-radius:22px;
+
+    color:#fff;
+
+    min-height:145px;
+
+    transition:.35s ease;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+}
+
+.stats-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 25px 45px rgba(0,0,0,.18);
+
+}
+
+.students{
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+}
+
+.courses{
+
+    background:linear-gradient(135deg,#8b5cf6,#6d28d9);
+
+}
+
+.faculty{
+
+    background:linear-gradient(135deg,#10b981,#059669);
+
+}
+
+.attendance{
+
+    background:linear-gradient(135deg,#f59e0b,#ea580c);
+
+}
+
+.stats-title{
+
+    display:block;
+
+    font-size:.95rem;
+
+    opacity:.9;
+
+    margin-bottom:8px;
+
+}
+
+.stats-number{
+
+    font-size:2.4rem;
+
+    font-weight:700;
+
+    margin:0;
+
+}
+
+.stats-icon{
+
+    width:72px;
+
+    height:72px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:2rem;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(12px);
+
+}
+
+.stats-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:-35px;
+
+    top:-35px;
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+}
+
+/* ===========================
+   REPORT BOX
+=========================== */
+
+.report-box{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    height:100%;
+
+    transition:.35s;
+
+}
+
+.report-box:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+
+}
+
+.report-progress{
+
+    height:12px;
+
+    border-radius:50px;
+
+    background:#edf2f7;
+
+}
+
+.audit-circle{
+
+    width:140px;
+
+    height:140px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:2.5rem;
+
+    font-weight:700;
+
+    color:#2563eb;
+
+    border:10px solid #dbeafe;
+
+    background:#f8fbff;
+
+}
+
+
+.glass-card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    border:1px solid #edf2f7;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.glass-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 45px rgba(37,99,235,.15);
+
+}
+
+.summary-icon{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:28px;
+
+}
+
+.summary-item span{
+
+    font-weight:600;
+
+}
+
+.progress{
+
+    border-radius:50px;
+
+    background:#edf2f7;
+
+}
+
+.progress-bar{
+
+    border-radius:50px;
+
+}
+
+
+/* ===========================
+   REPORT TABLE
+=========================== */
+
+.premium-table{
+    margin:0;
+}
+
+.premium-table thead th{
+    border:none;
+    background:#f8fafc;
+    color:#64748b;
+    font-size:13px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    padding:16px;
+}
+
+.premium-table tbody td{
+    padding:18px 16px;
+    border-top:1px solid #eef2f7;
+    vertical-align:middle;
+}
+
+.premium-table tbody tr{
+    transition:.3s;
+}
+
+.premium-table tbody tr:hover{
+    background:#f8fbff;
+}
+
+.user-avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    color:#fff;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    box-shadow:0 8px 18px rgba(37,99,235,.25);
+}
+
+.report-box .badge{
+    border-radius:30px;
+    padding:8px 14px;
+    font-weight:500;
+}
+
+.report-box{
+    background:#fff;
+    border-radius:22px;
+    padding:28px;
+    box-shadow:0 10px 35px rgba(15,23,42,.08);
+    border:1px solid #eef2f7;
+}
+
+.btn{
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+}

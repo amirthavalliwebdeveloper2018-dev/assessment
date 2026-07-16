@@ -1,0 +1,265 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Student Management System</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'style/style.css' %}" />
+
+    <!-- Page CSS -->
+    {% block css %} {% endblock %}
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+          <i class="bi bi-mortarboard-fill me-2"></i>
+          StudentMS
+        </a>
+
+        {% if user.is_authenticated %}
+
+        <button
+          class="btn text-white d-lg-none"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#sidebar"
+        >
+          <i class="bi bi-list fs-3"></i>
+        </button>
+
+        <div class="ms-auto dropdown">
+          <a
+            class="text-white text-decoration-none dropdown-toggle"
+            href="#"
+            data-bs-toggle="dropdown"
+          >
+            <i class="bi bi-person-circle fs-4 me-1"></i>
+            {{ user.username }}
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item" href="{% url 'profile' %}">
+                <i class="bi bi-person me-2"></i>
+                Profile
+              </a>
+            </li>
+
+            <li><hr class="dropdown-divider" /></li>
+
+            <li>
+              <a class="dropdown-item text-danger" href="{% url 'logout' %}">
+                <i class="bi bi-box-arrow-right me-2"></i>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {% endif %}
+      </div>
+    </nav>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    {% if user.is_authenticated %}
+
+    <div class="sidebar offcanvas offcanvas-start" id="sidebar" tabindex="-1">
+      <!-- <div class="offcanvas-header">
+        <h5 class="text-white mb-0">MENU</h5>
+
+        <button
+          class="btn-close btn-close-white"
+          data-bs-dismiss="offcanvas"
+        ></button>
+      </div> -->
+
+      <div class="offcanvas-body pt-4">
+        <a href="{% url 'dashboard' %}">
+          <i class="bi bi-speedometer2 me-2"></i>
+          Dashboard
+        </a>
+
+        <a href="{% url 'student_list' %}">
+          <i class="bi bi-people-fill me-2"></i>
+          Students
+        </a>
+
+        <a href="{% url 'course_list' %}">
+          <i class="bi bi-book-fill me-2"></i>
+          Courses
+        </a>
+
+        <a href="{% url 'faculty_list' %}">
+          <i class="bi bi-person-workspace me-2"></i>
+          Faculty
+        </a>
+
+        <a href="{% url 'attendance_list' %}">
+          <i class="bi bi-calendar-check me-2"></i>
+          Attendance
+        </a>
+
+        <!-- <a href="#">
+            <i class="bi bi-bar-chart-fill me-2"></i>
+            Reports
+        </a>
+
+        <a href="#">
+            <i class="bi bi-gear-fill me-2"></i>
+            Settings
+        </a> -->
+
+        <a href="{% url 'audit_log_list' %}">
+          <i class="bi bi-clock-history me-2"></i>
+          Audit Logs
+        </a>
+
+        <a href="{% url 'reports' %}">
+          <i class="bi bi-file-earmark-bar-graph me-2"></i>
+          Reports
+        </a>
+
+        <a href="{% url 'profile' %}">
+          <i class="bi bi-person-circle me-2"></i>
+          Profile
+        </a>
+
+        <hr class="border-secondary mx-3" />
+
+        <a href="{% url 'logout' %}" class="text-danger">
+          <i class="bi bi-box-arrow-right me-2"></i>
+          Logout
+        </a>
+      </div>
+    </div>
+
+    {% endif %}
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <!-- ================= FLOATING ALERT ================= -->
+
+    {% if messages %}
+
+    <div class="floating-alert">
+      {% for message in messages %}
+
+<div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show">
+
+    {{ message }}
+
+    <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert">
+    </button>
+
+</div>
+
+{% endfor %}
+    </div>
+
+    {% endif %}
+    <!-- <main
+      class="{% if user.is_authenticated %}content no-sidebar{% else %}login-content{% endif %}"
+    > -->
+    <main
+      class="{% if user.is_authenticated %}content{% else %}login-content{% endif %}"
+    >
+      <div class="container-fluid py-2">{% block content %} {% endblock %}</div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer text-center">
+      <div class="col-12">
+        <div class="row">
+          <p class="mb-0">  © 2026 Student Management System | Developed by
+      <strong><a href="https://fanciful-cupcake-5f4ffd.netlify.app/" class="text-decoration-none text-warning">Amirthavalli Jeyaraj</a></strong></p>
+
+        </div>
+      </div>
+    
+    </footer>
+
+    <!-- Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const alerts = document.querySelectorAll(".alert");
+
+    alerts.forEach(function(alert){
+
+        setTimeout(function(){
+
+            bootstrap.Alert.getOrCreateInstance(alert).close();
+
+        }, 4000);
+
+    });
+
+});
+
+document.addEventListener("click", function(e){
+
+    if(!e.target.closest(".alert")){
+
+        document.querySelectorAll(".alert").forEach(function(alert){
+
+            bootstrap.Alert.getOrCreateInstance(alert).close();
+
+        });
+
+    }
+
+});
+</script>
+    <script>
+      document.querySelectorAll(".sidebar a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          const sidebar = document.getElementById("sidebar");
+          const bsOffcanvas = bootstrap.Offcanvas.getInstance(sidebar);
+
+          if (bsOffcanvas) {
+            bsOffcanvas.hide();
+          }
+        });
+      });
+
+      window.addEventListener("pageshow", function () {
+        document.body.classList.remove("modal-open");
+
+        document
+          .querySelectorAll(".offcanvas-backdrop")
+          .forEach(function (backdrop) {
+            backdrop.remove();
+          });
+      });
+    </script>
+    {% block scripts %} {% endblock %}
+  </body>
+</html>

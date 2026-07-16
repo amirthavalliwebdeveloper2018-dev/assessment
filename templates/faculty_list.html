@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'style/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="row py-4">
+
+    <!-- Header -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="page-title mb-1 fw-bolder">
+                Faculty Management
+            </h2>
+
+            <p class="text-muted">
+                Manage faculty records and teaching staff
+            </p>
+
+        </div>
+
+        <a href="{% url 'add_faculty' %}" class="btn btn-primary btn-lg">
+
+            <i class="bi bi-person-plus-fill"></i>
+
+            Add Faculty
+
+        </a>
+
+    </div>
+
+    <!-- Faculty Table -->
+
+    <div class="table-responsive shadow-sm rounded-0 overflow-hidden">
+
+        <table class="table table-hover table-bordered align-middle mb-0">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Faculty Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Subject</th>
+                    <th>Assigned Courses</th>
+                    <th width="170">Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for faculty in faculties %}
+
+                <tr>
+
+                    <td>{{ faculty.id }}</td>
+
+                    <td>
+                        {{ faculty.faculty_name }}
+                    </td>
+
+                    <td>
+                        {{ faculty.email }}
+                    </td>
+
+                    <td>
+                        {{ faculty.phone }}
+                    </td>
+
+                    <td>
+                        <span class="badge bg-success">
+                            {{ faculty.subject }}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        {% for course in faculty.assigned_courses.all %}
+
+                            <span class="badge bg-primary me-1 mb-1">
+                                {{ course.course_name }}
+                            </span>
+
+                        {% empty %}
+
+                            <span class="text-muted">
+                                No Courses
+                            </span>
+
+                        {% endfor %}
+
+                    </td>
+
+                   <td class="action-column">
+
+                        <a href="{% url 'edit_faculty' faculty.id %}"
+                           class="btn btn-warning btn-sm">
+
+                           <i class="bi bi-pencil-square"></i> Edit 
+
+                        </a>
+
+                        <a href="{% url 'delete_faculty' faculty.id %}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure you want to delete this faculty?');">
+
+                            <i class="bi bi-trash"></i>
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="7" class="text-center py-4">
+
+                        <h6 class="text-muted">
+                            No Faculty Found
+                        </h6>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
